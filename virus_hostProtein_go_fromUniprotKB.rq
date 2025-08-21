@@ -1,0 +1,120 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX vg: <http://biohackathon.org/resource/vg#>
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX uniprotkb: <http://purl.uniprot.org/uniprot/>
+PREFIX uberon: <http://purl.obolibrary.org/obo/uo#>
+PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
+PREFIX sp: <http://spinrdf.org/sp#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX schema: <http://schema.org/>
+PREFIX sachem: <http://bioinfo.uochb.cas.cz/rdf/v1.0/sachem#>
+PREFIX rh: <http://rdf.rhea-db.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX pubmed: <http://rdf.ncbi.nlm.nih.gov/pubmed/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX pr: <http://www.wikidata.org/prop/reference/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX patent: <http://data.epo.org/linked-data/def/patent/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX orthodbGroup: <http://purl.orthodb.org/odbgroup/>
+PREFIX orthodb: <http://purl.orthodb.org/>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX oboInOwl: <http://www.geneontology.org/formats/oboInOwl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX np: <http://nextprot.org/rdf#>
+PREFIX nextprot_cv: <http://nextprot.org/rdf/terminology/>
+PREFIX nextprot: <http://nextprot.org/rdf/entry/>
+PREFIX mnx: <https://rdf.metanetx.org/schema/>
+PREFIX mnet: <https://rdf.metanetx.org/mnet/>
+PREFIX mesh: <http://id.nlm.nih.gov/mesh/>
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX lipidmaps: <https://www.lipidmaps.org/rdf/>
+PREFIX keywords: <http://purl.uniprot.org/keywords/>
+PREFIX insdcschema: <http://ddbj.nig.ac.jp/ontologies/nucleotide/>
+PREFIX insdc: <http://identifiers.org/insdc/>
+PREFIX identifiers: <http://identifiers.org/>
+PREFIX glyconnect: <https://purl.org/glyconnect/>
+PREFIX glycan: <http://purl.jp/bio/12/glyco/glycan#>
+PREFIX genex: <http://purl.org/genex#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+PREFIX eunisSpecies: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+PREFIX ensembltranscript: <http://rdf.ebi.ac.uk/resource/ensembl.transcript/>
+PREFIX ensemblterms: <http://rdf.ebi.ac.uk/terms/ensembl/>
+PREFIX ensemblprotein: <http://rdf.ebi.ac.uk/resource/ensembl.protein/>
+PREFIX ensemblexon: <http://rdf.ebi.ac.uk/resource/ensembl.exon/>
+PREFIX ensembl: <http://rdf.ebi.ac.uk/resource/ensembl/>
+PREFIX ec: <http://purl.uniprot.org/enzyme/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX chebislash: <http://purl.obolibrary.org/obo/chebi/>
+PREFIX chebihash: <http://purl.obolibrary.org/obo/chebi#>
+PREFIX cco: <http://rdf.ebi.ac.uk/terms/chembl#>
+PREFIX busco: <http://busco.ezlab.org/schema#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX allie: <http://allie.dbcls.jp/>
+PREFIX SWISSLIPID: <https://swisslipids.org/rdf/SLM_>
+PREFIX GO: <http://purl.obolibrary.org/obo/GO_>
+PREFIX ECO: <http://purl.obolibrary.org/obo/ECO_>
+PREFIX CHEBI: <http://purl.obolibrary.org/obo/CHEBI_>
+
+#SELECT DISTINCT ?uniprot ?label_uniprot ?pr ?uniprot02 ?label_uniprot02 ?organism02 ?interaction
+#SELECT DISTINCT ?uniprot ?uniprot02 ?interaction
+CONSTRUCT {
+?uniprot ?interaction ?uniprot02.
+?uniprot <http://www.w3.org/2000/01/rdf-schema#label> ?label_uniprot.
+?uniprot <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?pr.
+?uniprot02 <http://www.w3.org/2000/01/rdf-schema#label> ?label_uniprot02.
+?uniprot02 <http://purl.uniprot.org/core/organism> ?organism02.
+?uniprot <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?gene.
+?uniprot02 <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?gene02.
+?uniprot <http://purl.uniprot.org/core/classifiedWith> ?go_unirpt.
+?uniprot02 <http://purl.uniprot.org/core/classifiedWith> ?go_uniprot02.
+}
+WHERE {
+?uniprot <http://purl.uniprot.org/core/organism> ?organism . #?organism.
+
+VALUES ?organism {<http://purl.uniprot.org/taxonomy/2697049>} # 新型コロナウイルス"@ja
+# VALUES ?organism {<http://purl.uniprot.org/taxonomy/2725057>} # ヘルペスウイルス"@ja
+# VALUES ?organism {<http://purl.uniprot.org/taxonomy/2901879>} # 重症急性呼吸器症候群コロナウイルス"@ja
+# VALUES ?organism {<http://purl.uniprot.org/taxonomy/3052303>} # リンパ球性脈絡髄膜炎ウイルス"@ja
+# VALUES ?organism {<http://purl.uniprot.org/taxonomy/3052230>} # C型肝炎ウイルス"@ja
+# VALUES ?organism {<http://purl.uniprot.org/taxonomy/3052225>} # ニパウイルス"@ja
+?uniprot <http://www.w3.org/2000/01/rdf-schema#label> ?label_uniprot.
+  OPTIONAL{?uniprot <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?pr.
+    FILTER REGEX(STR(?pr), "http://purl.obolibrary.org/obo/PR_")}
+#  OPTIONAL{?uniprot02 <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?pr02.
+#    FILTER REGEX(STR(?pr02), "http://purl.obolibrary.org/obo/PR_")}
+?uniprot  <http://purl.uniprot.org/core/interaction> ?interaction.
+#  OPTIONAL{?interaction	<http://purl.uniprot.org/core/participant> ?intact_ebi.}
+#  OPTIONAL{?interaction	<http://purl.uniprot.org/core/participant> ?intact_ebi02.}
+?uniprot02	<http://purl.uniprot.org/core/interaction> ?interaction.
+?uniprot02 <http://www.w3.org/2000/01/rdf-schema#label> ?label_uniprot02.
+?uniprot02 <http://purl.uniprot.org/core/organism> ?organism02 
+#  OPTIONAL{?intact_ebi02	<http://www.w3.org/2002/07/owl#sameAs> ?uniprot02.}
+#  OPTIONAL{?intact_ebi	<http://www.w3.org/2002/07/owl#sameAs> ?uniprot.}
+
+ OPTIONAL{?uniprot <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?gene.
+  FILTER REGEX(STR(?gene), "http://purl.uniprot.org/geneid/")}
+ OPTIONAL{?uniprot02 <http://www.w3.org/2000/01/rdf-schema#seeAlso> ?gene02.
+  FILTER REGEX(STR(?gene02), "http://purl.uniprot.org/geneid/")}
+
+ OPTIONAL{?uniprot <http://purl.uniprot.org/core/classifiedWith> ?go_uniprot.
+  FILTER REGEX(STR(?go_uniprot), "http://purl.obolibrary.org/obo/GO_")}
+ OPTIONAL{?uniprot02 <http://purl.uniprot.org/core/classifiedWith> ?go_uniprot02.
+  FILTER REGEX(STR(?go_uniprot02), "http://purl.obolibrary.org/obo/GO_")}
+
+  	FILTER (?uniprot != ?uniprot02) 
+#    	FILTER (?intact_ebi != ?intact_ebi02) 
+}
+OFFSET 0
+LIMIT 100000
